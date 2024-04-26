@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 const Block = class {
     constructor(index, data, previousHash) {
         this.index = index;

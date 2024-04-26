@@ -1,12 +1,8 @@
 import express from "express";
+import { createNewBlock, getAllBlocks } from "../controllers/blockController.mjs";
 
 const router = express.Router();
 
-router.route('/').get((req, res, next) => {
-    res.json({
-        msg: "Hello from blockRoutes.mjs!"
-
-    });
-});
+router.route('/').get(getAllBlocks).post(createNewBlock);
 
 export default router;
