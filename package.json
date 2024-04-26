@@ -1,0 +1,20 @@
+{
+  "name": "assignments",
+  "version": "1.0.0",
+  "description": "In the first assignment we have to create a node.js application that will imitate a Blockchain application. We can name it as we wish.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "Blockchain",
+    "node.js"
+  ],
+  "author": "Antonio Lingårdsson Luna",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
