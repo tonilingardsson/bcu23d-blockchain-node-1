@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 
+console.log(Math.random() * Math.pow(10, 18));
+
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
