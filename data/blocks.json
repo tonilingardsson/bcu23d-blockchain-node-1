@@ -1,22 +1,48 @@
 [
   {
     "index": 1,
-    "timestamp": 1714123587050,
+    "timestamp": 1714144200918,
     "data": {
-      "type": "data"
+      "msg": "hej"
     },
     "previousHash": null,
     "nonce": 0,
-    "hash": "b6d495493edc417502c4f15fcbd7a3f481f1e85de8b6f2f4bb93867d064a6afa"
+    "hash": "e557a6211d6a859e3d474e0f4d38314bc4c3ad0eeb0d30e9622b240cc18c406b"
   },
   {
     "index": 2,
-    "timestamp": 1714130662017,
-    "data": {
-      "type": "data"
-    },
-    "previousHash": "b6d495493edc417502c4f15fcbd7a3f481f1e85de8b6f2f4bb93867d064a6afa",
+    "timestamp": 1714144215551,
+    "data": {},
+    "previousHash": "e557a6211d6a859e3d474e0f4d38314bc4c3ad0eeb0d30e9622b240cc18c406b",
     "nonce": 0,
-    "hash": "f5d45497f564e0380044a26d1767ce94d2dbb285efefa75dc47e0c88d260ccdb"
+    "hash": "1e42530be4a9ad79a9f7a93a5efd07f5b6f6dd16ab6014984c9b85718c91a652"
+  },
+  {
+    "index": 3,
+    "timestamp": 1714144220515,
+    "data": {},
+    "previousHash": "1e42530be4a9ad79a9f7a93a5efd07f5b6f6dd16ab6014984c9b85718c91a652",
+    "nonce": 0,
+    "hash": "d0c6d89741690653b936091dec6ccb8594fbab6fa3cd19df7ca817f64e5a9c2f"
+  },
+  {
+    "index": 4,
+    "timestamp": 1714144240544,
+    "data": {
+      "msg": "hej"
+    },
+    "previousHash": "d0c6d89741690653b936091dec6ccb8594fbab6fa3cd19df7ca817f64e5a9c2f",
+    "nonce": 0,
+    "hash": "5bfc970f781655ef85b6fbf3ba59f1e26d9d550b7c461e7c17074a6e27fc3341"
+  },
+  {
+    "index": 5,
+    "timestamp": 1714146479860,
+    "data": {
+      "msg": "hej"
+    },
+    "previousHash": "5bfc970f781655ef85b6fbf3ba59f1e26d9d550b7c461e7c17074a6e27fc3341",
+    "nonce": 0,
+    "hash": "a945b946118e2578eb754e75ef111f4c4e29c67461a201a8cd62e5275f56ed9b"
   }
 ]
