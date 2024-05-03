@@ -1,8 +1,18 @@
 import express from "express";
 
-const PORT = 5001;
+global.__appdir = ''
+
+const PORT = process.argv[2] || process.env.PORT || 5000;;
 const app = express();
+
 
 app.use(express.json());
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.use('/api/v1/blockchain', () => { }); // Blockchain's endpoint
+app.use('/api/v1/members', () => { }); // Members's endpoint
+
+app.all('*', () => { })
+
+app.use(() => { })
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}...`));
