@@ -1,7 +1,7 @@
 import { writeFileSync, appendFileSync } from 'fs';
 import { join } from 'path';
 
-const FileHanlder = class {
+const FileHandler = class {
     constructor(folderName, fileName) {
         this.path = join(__appdir, folderName, fileName);
     }
@@ -23,4 +23,4 @@ const FileHanlder = class {
     }
 };
 
-export default FileHanlder;
+export default FileHandler;
