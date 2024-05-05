@@ -3,6 +3,11 @@ import ServerResponse from "../utils/ServerResponse.mjs";
 import FileHandler from "../utils/FileHandler.mjs";
 import ErrorResponse from "../utils/ErrorResponse.mjs";
 
+const blockchainJSON = new FileHandler(
+    'data',
+    `blockchain-${process.argv[2]}.json`
+);
+
 const getBlockchain = (req, res, next) => {
     res
         .status(200)

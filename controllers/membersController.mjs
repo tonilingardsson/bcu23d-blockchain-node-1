@@ -58,7 +58,7 @@ const syncMembers = (url, next) => {
                 });
         });
     } catch (error) {
-        throw error;
+        return next(new ErrorResponse(error, error.status));
     }
 };
 
