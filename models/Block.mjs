@@ -8,7 +8,6 @@ const Block = class {
         this.nonce = 0;
         this.difficulty = +process.env.DIFFICULTY || 1;
     }
-
 };
 
 export default Block;

@@ -3,3 +3,4 @@ config
 node_modules
 .DS_store
 Thumbs.db
+logs
