@@ -1,18 +1,25 @@
 import express from "express";
 
+
 import { PORT } from "./startup.mjs";
 import blockchainRoutes from "./routes/blockchainRoutes.mjs";
+import membersRoutes from './routes/membersRoutes.mjs';
+import resourceNotFound from './middlewares/resourceNotFound.mjs';
+import errorHandler from './middlewares/errorHandler.mjs';
+import logHandler from './middlewares/logHandler.mjs';
 
 const app = express();
 
 
 app.use(express.json());
 
-app.use('/api/v1/blockchain', blockchainRoutes); // Blockchain's endpoint
-app.use('/api/v1/members', () => { }); // Members's endpoint
+app.use(logHandler);
 
-app.all('*', () => { })
+app.use('/api/v1/blockchain', blockchainRoutes);
+app.use('/api/v1/members', membersRoutes);
 
-app.use(() => { })
+app.all('*', resourceNotFound);
+
+app.use(() => errorHandler);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}...`));
