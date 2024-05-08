@@ -1,1 +1,42 @@
-{}
+{
+  "name": "Blockchain",
+  "chain": [
+    {
+      "index": 0,
+      "timestamp": 1714894922465,
+      "previousHash": null,
+      "hash": "0",
+      "data": [],
+      "nonce": 0,
+      "difficulty": 1
+    },
+    {
+      "index": 1,
+      "timestamp": 1714895408819,
+      "previousHash": "0",
+      "hash": "06805d2559752e9fcf094acf3685f4a2a1cd7e2538036299052fa2268b569705",
+      "data": {
+        "from": "sender",
+        "to": "recipient",
+        "amount": 10
+      },
+      "nonce": 34,
+      "difficulty": 1
+    },
+    {
+      "index": 2,
+      "timestamp": 1714895504738,
+      "previousHash": "06805d2559752e9fcf094acf3685f4a2a1cd7e2538036299052fa2268b569705",
+      "hash": "0166581aa5f3b8adf3bec1ac272012c0f9d3bf8854cad5481177ef9bb2958593",
+      "data": {
+        "from": "sender",
+        "to": "recipient",
+        "amount": 10
+      },
+      "nonce": 29,
+      "difficulty": 1
+    }
+  ],
+  "memberNodes": [],
+  "nodeUrl": "http://localhost:5002"
+}
