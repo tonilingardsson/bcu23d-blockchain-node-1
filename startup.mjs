@@ -1,15 +1,16 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
-import blockchainJSON from "./data/blockchain.json" assert { type: "json" };
-
 import Blockchain from "./models/Blockchain.mjs";
 import FileHandler from "./utils/FileHandler.mjs";
 
 global.__appdir = dirname(fileURLToPath(import.meta.url));
 
 const setupBlockchain = () => {
-    const blockchainJSON = new FileHandler('data', `blockchain-${process.argv[2]}.json`);
+    const blockchainJSON = new FileHandler(
+        'data',
+        `blockchain-${process.argv[2]}.json`
+    );
 
     let blockchain = blockchainJSON.read(true);
 
