@@ -1,4 +1,4 @@
-const ErrorResponse = class extends Erro {
+const ErrorResponse = class extends Error {
     constructor(message, status) {
         super(message);
         this.success = status >= 200 && status <= 299;

@@ -1,4 +1,4 @@
-cpmst ServerResponse = class {
+const ServerResponse = class {
     constructor({ status, error, data }) {
         this.success = status >= 200 && status < 300;
         this.status = status;
