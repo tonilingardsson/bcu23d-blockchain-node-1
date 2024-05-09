@@ -1,5 +1,23 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from "vitest";
+import { mineBlock } from "../controllers/blockchainController.mjs";
+import ErrorResponse from "../utils/ErrorResponse.mjs";
 
-describe('blockchainController', () => {
-    it('Test 1', () => { });
+const req = { body: { data: "data" } };
+const res = {
+    status: (statusCode) => {
+        return {
+            status: statusCode,
+            json: (dataJSON) => dataJSON
+        };
+    },
+};
+
+const next = (input) => input;
+
+describe('Testing mineBlock function', () => {
+    it('should take in data without throwing an error', () => {
+        const testFunc = mineBlock(req, res, next);
+
+        expect(testFunc).not.toThrow()
+    });
 });
