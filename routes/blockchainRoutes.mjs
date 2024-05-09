@@ -18,6 +18,6 @@ router.route('/blocks/:index').get(getBlockByIndex);
 
 router.route('/mine').post(mineBlock);
 
-// router.route('/consensus').get(synchronizeChain)
+router.route('/consensus').get(synchronizeChain)
 
 export default router;
