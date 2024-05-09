@@ -48,18 +48,17 @@ const syncMembers = (url, next) => {
 
     try {
         members.forEach(async (member) => {
-            await fetch(`${url}/api/v1/members/register-node`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ nodeUrl: member }),
-                });
+            await fetch(`${url}/api/v1/members/register-node`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ nodeUrl: member }),
+            });
         });
     } catch (error) {
         return next(new ErrorResponse(error, error.status));
     }
 };
 
-export { getMemberNodes, createNode }
+export { getMemberNodes, createNode };
