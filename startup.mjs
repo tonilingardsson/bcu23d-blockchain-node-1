@@ -6,29 +6,11 @@ import FileHandler from "./utils/FileHandler.mjs";
 
 global.__appdir = dirname(fileURLToPath(import.meta.url));
 
-const setupBlockchain = () => {
-    const blockchainJSON = new FileHandler(
-        'data',
-        process.argv[2]
-            ?
-            `blockchain-${process.argv[2]}.json`
-            :
-            'blockchain-test.json'
-    );
+const NODE_URL = process.argv[3] || 'http://localhost:5000';
+const PORT = +process.env.PORT || 5000;
+const DIFFICULTY = +process.env.DIFFICULTY || 1;
+const MINE_RATE = +process.env.MINE_RATE || 1000;
 
-    let blockchain = blockchainJSON.read(true);
+const blockchain = Blockchain.createChain('BlockedBrain');
 
-    if (Object.keys(blockchain).length === 0) {
-        blockchain = new Blockchain();
-
-        blockchainJSON.write(blockchain);
-    } else {
-        Object.setPrototypeOf(blockchain, Blockchain.prototype);
-    }
-    return blockchain;
-};
-
-const blockchain = setupBlockchain();
-const PORT = process.argv[2] || process.env.PORT || 5000;
-
-export { blockchain, PORT };
+export { NODE_URL, PORT, DIFFICULTY, MINE_RATE, blockchain };
