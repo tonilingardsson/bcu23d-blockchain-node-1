@@ -48,8 +48,46 @@ const mineBlock = (req, res, next) => {
 
     const block = blockchain.proofOfWork(body);
 
+    try {
+        blockchainJSON.memberNodes.forEach(async (url) => {
+            await fetch(`${url}/api/v1/blockchain/broadcast`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(block),
+            });
+        });
+    } catch (error) {
+        return next(new ErrorResponse(error, error.status));
+    }
+
     blockchainJSON.write(blockchain);
     res.status(201).json(new ServerResponse({ status: 201, data: block }));
+};
+
+const broadcastBlock = (req, res, next) => {
+    const block = req.body;
+    const lastBlock = blockchain.getLastBlock();
+    const currentHash = lastBlock.hash === block.previousHash;
+    const currentIndex = lastBlock.index + 1 === block.index;
+
+    if (currentHash && currentIndex) {
+        blockchainJSON.chain.push(block);
+
+        blockchainJSON.write(blockchain);
+        res.status(201).json(new
+            ServerResponse({
+                status: 201, data: block
+
+            }));
+    } else {
+        next(
+            new ErrorResponse(`Cannot add the block to the current node ${req.headers.host}`,
+                400
+            )
+        );
+    }
 };
 
 const synchronizeChain = (req, res, next) => {
@@ -130,5 +168,6 @@ export {
     getLatestBlock,
     getBlockByIndex,
     mineBlock,
+    broadcastBlock,
     synchronizeChain,
 };
