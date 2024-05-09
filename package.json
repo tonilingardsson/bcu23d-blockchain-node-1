@@ -4,16 +4,16 @@
   "description": "In the first assignment we have to create a node.js application that will imitate a Blockchain application. We can name it as we wish.",
   "main": "server.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "start": "node --env-file=config/config.env server.mjs",
-    "dev": "nodemon --env-file=config/config.env server.mjs",
-    "node1": "nodemon --env-file=config/config.env server.mjs 5000 http://localhost:5000",
-    "node2": "nodemon --env-file=config/config.env server.mjs 5001 http://localhost:5001",
-    "node3": "nodemon --env-file=config/config.env server.mjs 5002 http://localhost:5002"
+    "dev": "nodemon --env-file=config/config.env server.mjs 5000 http://localhost:5000",
+    "node1": "nodemon --env-file=config/config.env server.mjs 5001 http://localhost:5001",
+    "node2": "nodemon --env-file=config/config.env server.mjs 5002 http://localhost:5002",
+    "node3": "nodemon --env-file=config/config.env server.mjs 5003 http://localhost:5003"
   },
   "keywords": [
     "Blockchain",
-    "node.mjs",
+    "node.js",
     "application"
   ],
   "author": "Antonio Lingårdsson Luna",
