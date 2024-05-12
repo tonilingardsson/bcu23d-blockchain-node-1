@@ -1,0 +1,45 @@
+{
+  "name": "Rowel Blockchain",
+  "chain": [
+    {
+      "index": 1,
+      "timestamp": 1715529700521,
+      "previousHash": null,
+      "hash": "0",
+      "data": [],
+      "nonce": 0,
+      "difficulty": 1
+    },
+    {
+      "index": 2,
+      "timestamp": 1715532815865,
+      "previousHash": "0",
+      "hash": "00653aec451cc38afde49b637a8b8b54c2a27c2cb1f45b877a35de932fb0ab23",
+      "data": {
+        "amount": 5,
+        "sender": "Rowel",
+        "recipient": "Moa"
+      },
+      "nonce": 1330,
+      "difficulty": 2
+    },
+    {
+      "index": 3,
+      "timestamp": 1715532944158,
+      "previousHash": "00653aec451cc38afde49b637a8b8b54c2a27c2cb1f45b877a35de932fb0ab23",
+      "hash": "0003fdfc06cf66a3a09acd4395250aad48e39651ebe72c141a18d5acd22c29ce",
+      "data": {
+        "amount": 15,
+        "sender": "Rowel",
+        "recipient": "Moa"
+      },
+      "nonce": 7831,
+      "difficulty": 3
+    }
+  ],
+  "memberNodes": [
+    "http://localhost:3002",
+    "http://localhost:3001"
+  ],
+  "nodeUrl": "http://localhost:3000"
+}

@@ -1,11 +1,10 @@
-import { PORT, NODE_URL, MINE_RATE } from "../startup.mjs";
+import { NODE_URL, MINE_RATE } from "../startup.mjs";
 import { createHash } from "../utils/cryptoLib.mjs";
-import FileHandler from "../utils/FileHandler.mjs";
 import Block from "./Block.mjs";
 
 const Blockchain = class {
-    constructor(name, chain, memberNodes, nodeUrl) {
-        this.name = name || "Blockchain";
+    constructor({ name, chain, memberNodes, nodeUrl }) {
+        this.name = name || 'TonisBlockchain';
         this.chain = chain || [Blockchain.createGenesisBlock()];
         this.memberNodes = memberNodes || [];
         this.nodeUrl = nodeUrl || NODE_URL;
@@ -13,7 +12,7 @@ const Blockchain = class {
 
     createBlock(data) {
         const block = new Block(
-            this.chain.length,
+            this.chain.length + 1,
             Date.now(),
             this.getLastBlock().hash,
             data
@@ -40,7 +39,7 @@ const Blockchain = class {
             difficulty = lastBlock.difficulty;
             difficulty = Blockchain.adjustDifficulty(lastBlock, timestamp);
             hash = Blockchain.hashBlock({ ...block, timestamp, nonce, difficulty });
-        } while (!hash.startsWith("0".repeat(difficulty)));
+        } while (!hash.startsWith('0'.repeat(difficulty)));
 
         Object.assign(block, { timestamp, hash, nonce, difficulty });
 
@@ -48,27 +47,23 @@ const Blockchain = class {
         return block;
     }
 
-    static createChain(name) {
-        const blockchainJSON = new FileHandler("data", `blockchain-${PORT}.json`);
-
-        let blockchain = blockchainJSON.read(true);
+    static createChain(blockchain, name) {
+        let newBlockchain;
 
         if (
             Object.keys(blockchain).toString() !==
             Object.keys(new this({})).toString()
         ) {
-            blockchain = new this({ name });
-
-            blockchainJSON.write(blockchain);
+            newBlockchain = new this({ name });
         } else {
-            blockchain = new this(blockchain);
+            newBlockchain = new this(blockchain);
         }
 
-        return blockchain;
+        return newBlockchain;
     }
 
     static createGenesisBlock() {
-        const block = new Block(0, Date.now(), null, []);
+        const block = new Block(1, Date.now(), null, []);
         return block;
     }
 

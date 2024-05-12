@@ -1,10 +1,10 @@
-import express from "express";
-import { PORT } from "./startup.mjs";
+import express from 'express';
+import { PORT } from './startup.mjs';
 
-import errorHandler from "./middlewares/errorHandler.mjs";
-import logHandler from "./middlewares/logHandler.mjs";
+import errorHandler from './middlewares/errorHandler.mjs';
+import logHandler from './middlewares/logHandler.mjs';
 
-import blockchainRoutes from "./routes/blockchainRoutes.mjs";
+import blockchainRoutes from './routes/blockchainRoutes.mjs';
 import membersRoutes from './routes/membersRoutes.mjs';
 
 import resourceNotFound from './utils/resourceNotFound.mjs';
@@ -19,6 +19,6 @@ app.use('/api/v1/members', membersRoutes);
 
 app.all('*', resourceNotFound);
 
-app.use(() => errorHandler);
+app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}...`));
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`));

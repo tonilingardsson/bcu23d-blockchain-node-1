@@ -1,4 +1,4 @@
-import { appendFileSync, readFileSync, writeFileSync } from 'fs';
+import { appendFileSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import { join as joinPath } from 'path';
 
 const FileHandler = class {
@@ -13,6 +13,15 @@ const FileHandler = class {
             throw error;
         }
     }
+
+    exists() {
+        try {
+            return existsSync(this.pathname);
+        } catch (error) {
+            throw error;
+        }
+    }
+
     read(isJSON = false) {
         try {
             const data = readFileSync(this.pathname, 'utf8');
@@ -23,8 +32,8 @@ const FileHandler = class {
         } catch (error) {
             throw error;
         }
-
     }
+
     write(data) {
         try {
             writeFileSync(this.pathname, JSON.stringify(data, null, 2), 'utf8');

@@ -5,8 +5,7 @@ import ServerResponse from "../utils/ServerResponse.mjs";
 import ErrorResponse from "../utils/ErrorResponse.mjs";
 import FileHandler from "../utils/FileHandler.mjs";
 
-const blockchainJSON = new FileHandler('data',
-    `blockchain-${PORT}.json`);
+const blockchainJSON = new FileHandler("data", `blockchain-${PORT}.json`);
 
 const getBlockchain = (req, res, next) => {
     res.status(200).json(new ServerResponse({ status: 200, data: blockchain }));
@@ -26,7 +25,7 @@ const getLatestBlock = (req, res, next) => {
 
 const getBlockByIndex = (req, res, next) => {
     const index = +req.params.index;
-    const block = blockchain.chain[index];
+    const block = blockchain.chain.find((b) => b.index === index);
 
     if (!block) {
         return next(
@@ -42,24 +41,27 @@ const mineBlock = (req, res, next) => {
 
     if (!(body instanceof Object && !(body instanceof Array))) {
         return next(
-            new ErrorResponse(`${JSON.stringify(body)} is not valid. It must be an object`, 400)
+            new ErrorResponse(
+                `${JSON.stringify(body)} is not valid. It must be an object`,
+                400
+            )
         );
     }
 
     const block = blockchain.proofOfWork(body);
 
     try {
-        blockchainJSON.memberNodes.forEach(async (url) => {
+        blockchain.memberNodes.forEach(async (url) => {
             await fetch(`${url}/api/v1/blockchain/broadcast`, {
                 method: "POST",
                 headers: {
-                    'Content-type': 'application/json',
+                    "Content-type": "application/json",
                 },
                 body: JSON.stringify(block),
             });
         });
     } catch (error) {
-        return next(new ErrorResponse(error, error.status));
+        return next(new ErrorResponse(error.message, error.status));
     }
 
     blockchainJSON.write(blockchain);
@@ -73,17 +75,15 @@ const broadcastBlock = (req, res, next) => {
     const currentIndex = lastBlock.index + 1 === block.index;
 
     if (currentHash && currentIndex) {
-        blockchainJSON.chain.push(block);
+        blockchain.chain.push(block);
 
         blockchainJSON.write(blockchain);
-        res.status(201).json(new
-            ServerResponse({
-                status: 201, data: block
-
-            }));
+        res.status(201).json(
+            new ServerResponse({ status: 201, data: block, }));
     } else {
         next(
-            new ErrorResponse(`Cannot add the block to the current node ${req.headers.host}`,
+            new ErrorResponse(
+                `Cannot add the block to the current node ${req.headers.host}`,
                 400
             )
         );
@@ -100,7 +100,9 @@ const synchronizeChain = (req, res, next) => {
 
     if (nodesToCheck === 0) {
         return next(
-            new ErrorResponse(`The current node ${blockchain.node} is not connected to this network`, 400
+            new ErrorResponse(
+                `The current node ${blockchain.node} is not connected to this network`,
+                400
             )
         );
     }
@@ -127,7 +129,6 @@ const synchronizeChain = (req, res, next) => {
                 }
 
                 if (longestChain !== blockchain.chain) {
-
                     if (!Blockchain.validateChain(longestChain)) {
                         maxLength = blockchain.chain.length;
                         longestChain = blockchain.chain;
@@ -147,7 +148,7 @@ const synchronizeChain = (req, res, next) => {
                             status: 200,
                             error:
                                 invalidChains.length > 0 &&
-                                `Node(s) ${invalidChains.join(', ')} has been compromised`,
+                                `Node(s) ${invalidChains.join(", ")} has been compromised`,
                             data: {
                                 message: `Synchronization completed, [${syncCounter}] change(s) has been made to the current node ${blockchain.nodeUrl}`,
                             },
@@ -159,7 +160,6 @@ const synchronizeChain = (req, res, next) => {
     } catch (error) {
         return next(new ErrorResponse(error, error.status));
     }
-
 };
 
 export {
